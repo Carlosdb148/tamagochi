@@ -1,7 +1,8 @@
+
 var form;
 
 function target(idObject){
-    form = idObject;
+    form = document.getElementById(idObject);
 }
 
 function createCheckBox (n){
@@ -10,7 +11,8 @@ function createCheckBox (n){
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = "ch" + i;
-        checkbox.style.visibility = "hidden";
+        checkbox.name = "ch" + i;
+        //checkbox.style.visibility = "hidden";
         div.appendChild(checkbox);
         let label = document.createElement('label');
         label.for = "ch" + i;
@@ -20,10 +22,13 @@ function createCheckBox (n){
             if(checkbox.checked == true){
                 checkbox.checked = false;
             }else{
-                //animation
-                checkbox.checked == true;
+                let check = document.querySelector('svg');
+                check.style="display:block;"
+                checkbox.innerHTML = check;
+                checkbox.checked = true;
             }
         });
+        div.appendChild(document.createElement('br'));
     }
     form.appendChild(div);
 }
@@ -49,7 +54,17 @@ function createButton(n){
     
 }
 
+function init(json){
+    for (let key in json) {
+        if(formUI.hasOwnProperty(key)) {
+            eval(key)(json[key]);
+        }
+    }
+}
 
+var formUI = formUI || {};
+
+formUI.init = init;
 formUI.target = target;
 formUI.createCheckBox = createCheckBox;
 formUI.createProgressBar = createProgressBar;

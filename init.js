@@ -1,6 +1,6 @@
 import formUI from "./object.js"
 
-formUI({
+formUI.init({
     "target" : "container",
     "createCheckBox" : "3",
     "createProgressBar": "1",
